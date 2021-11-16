@@ -234,6 +234,29 @@ envioscheduler_apt_packages:
 {% endif %}
 ```
 
+Before:
+
+```yaml
+d:
+  cmd.run:
+    - name: 'rm -rf /var/lib/cloud9/BeagleBone/Black /var/lib/cloud9/PocketBeagle/pru /var/lib/cloud9/BeagleBone/Black/pru /var/cache/doc-beaglebone-getting-started ; rm -rf /var/cache/doc-beaglebone-getting-started ; rm -rf /var/lib/cloud9 ; rm -rf /var/lib/cloud9_backup_examples/ ; rm -rf /opt/cloud9'
+
+g:
+  cmd.run:
+    - name: 'rm -rf /opt/cloud9 /var/lib/cloud9'
+```
+
+After:
+
+```jinja
+{% for dir in [ '/var/cache/doc-beaglebone-getting-started', '/var/cache/doc-beaglebone-getting-started',
+'/var/lib/cloud9', '/var/lib/cloud9_backup_examples/', '/opt/cloud9'] %}
+delete_dir_{{ dir }}:
+  file.absent:
+    - name: {{ dir }}
+{% endfor %}
+```
+
 Systemd units management has also been replaced in favor of `salt.modules.systemd_service`.
 
 `/srv/salt/gateway/modules/networkmanager/v1/install.sls`

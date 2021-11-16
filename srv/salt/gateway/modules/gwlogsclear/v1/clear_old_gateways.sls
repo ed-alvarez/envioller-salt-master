@@ -46,9 +46,9 @@ supervisor_service_config:
   file.managed:
     - name: /etc/init.d/supervisor
     - source: salt://{{ slspath }}/files/initd_supervisor.conf
-    - user:  root
+    - user: root
     - group: root
-    - mode:  755
+    - mode: "0755"
     - template: jinja
 
 restart_supervisor:
