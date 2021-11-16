@@ -1,0 +1,5 @@
+{%- import_yaml slspath + "/defaults.yaml" as default_settings %}
+{%- set opcdaclassic = salt.pillar.get(
+    'envio:opcdaclassic',
+    default=default_settings.envio.opcdaclassic,
+    merge=True) %}

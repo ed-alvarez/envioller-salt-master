@@ -1,0 +1,5 @@
+{%- import_yaml slspath + "/defaults.yaml" as default_settings %}
+{%- set bacnet_stack = salt.pillar.get(
+    'envio:bacnet_stack',
+    default=default_settings.envio.bacnet_stack,
+    merge=True) %}

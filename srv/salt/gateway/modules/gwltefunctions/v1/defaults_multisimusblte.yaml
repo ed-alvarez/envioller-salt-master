@@ -1,0 +1,139 @@
+envio:
+  gwltefunctions:
+    install:     false
+    user:        debian
+    group:       debian
+    install_dir:     /home/debian/gwltefunctions
+    deploy_key_file: /home/debian/.ssh/gwltefunctions_deploy_key
+  gwltefunctions_config:
+    ethppp_config:
+      ENABLE_PPP: 0                        #DEFAULT 0
+      ENABLE_USBLTE: 1                     #DEFAULT 1
+      ENABLE_USBWIFI: 0                     #DEFAULT 1
+      ENABLE_ETHBBB: 1                        #DEFAULT 1
+      ENABLE_ETHBBBSTATIC: 1                  #DEFAULT 1
+      ENABLE_ETHCAPE: 1
+      ENABLE_ETHCAPESTATIC: 1
+      #this segregates the static IP's so the devices use their own static ip's rather than using the ethbbb static ip
+      #ENABLE_ETH_STATIC_ONLY: 0             #DEFAULT 0
+      ENABLE_ETHSTATIC_LOCAL_IP_GATEWAY: 0  #Set "Via" for local routes
+      ETHCAPE_DISABLE_DHCP: 0
+      ETHBBB_DISABLE_DHCP: 0
+      ENABLE_ETHSTATIC_BBB_LOCAL_IP_ROUTES: 1       #DEFAULT 1
+      ETHSTATIC_BBB_GATEWAY: "192.168.125.1" #DEFAULT "192.168.125.1"
+      ETHSTATIC_BBB_IP_DEFAULT: "192.168.125.125"
+      ETHSTATIC_BBB_LOCAL_ROUTE_DEFAULT: "192.168.125.0/24"
+      ETHSTATIC_BBB_IP2: "192.168.125.125"
+      ETHSTATIC_BBB_LOCAL_ROUTE2: "192.168.125.0/24"
+      ETHSTATIC_BBB_IP3: "192.168.125.125"
+      ETHSTATIC_BBB_LOCAL_ROUTE3: "192.168.125.0/24"
+      ETHSTATIC_BBB_IP4: "192.168.125.125"
+      ETHSTATIC_BBB_LOCAL_ROUTE4: "192.168.125.0/24"
+      ETHSTATIC_BBB_IP5: "192.168.125.125"
+      ETHSTATIC_BBB_LOCAL_ROUTE5: "192.168.125.0/24"
+      ETHSTATIC_BBB_IP6: "192.168.125.125"
+      ETHSTATIC_BBB_LOCAL_ROUTE6: "192.168.125.0/24"
+      ENABLE_ETHSTATIC_CAPE_LOCAL_IP_ROUTES: 1       #DEFAULT 1
+      ETHSTATIC_CAPE_GATEWAY: "192.168.125.1" #DEFAULT "192.168.125.1"
+      ##TODO: SET THE /etc/network/interfaces eth0 to .124
+      ETHSTATIC_CAPE_IP_DEFAULT: "192.168.125.124"
+      ETHSTATIC_CAPE_LOCAL_ROUTE_DEFAULT: "192.168.125.0/24"
+      ETHSTATIC_CAPE_IP2: "192.168.125.124"
+      ETHSTATIC_CAPE_LOCAL_ROUTE2: "192.168.125.0/24"
+      ETHSTATIC_CAPE_IP3: "192.168.125.124"
+      ETHSTATIC_CAPE_LOCAL_ROUTE3: "192.168.125.0/24"
+      ETHSTATIC_CAPE_IP4: "192.168.125.124"
+      ETHSTATIC_CAPE_LOCAL_ROUTE4: "192.168.125.0/24"
+      ETHSTATIC_CAPE_IP5: "192.168.125.124"
+      ETHSTATIC_CAPE_LOCAL_ROUTE5: "192.168.125.0/24"
+      ETHSTATIC_CAPE_IP6: "192.168.125.124"
+      ETHSTATIC_CAPE_LOCAL_ROUTE6: "192.168.125.0/24"
+      #TODO: NEED SUBNET MASK FOR SALT HERE ALSO FOR /etc/network/interfaces eg. 255.255.255.0
+      ETHSTATIC_CAPE_IP_DEFAULT_SUBNET_MASK_INTERFACE_FORMAT: "255.255.255.0"
+      ETHSTATIC_CAPE_IP_DEFAULT_SUBNET_MASK: "/24"
+      ETHSTATIC_CAPE_IP2_SUBNET_MASK: "/24"
+      ETHSTATIC_CAPE_IP3_SUBNET_MASK: "/24"
+      ETHSTATIC_CAPE_IP4_SUBNET_MASK: "/24"
+      ETHSTATIC_CAPE_IP5_SUBNET_MASK: "/24"
+      ETHSTATIC_CAPE_IP6_SUBNET_MASK: "/24"
+      ETHSTATIC_BBB_IP_DEFAULT_SUBNET_MASK_INTERFACE_FORMAT: "255.255.255.0"
+      ETHSTATIC_BBB_IP_DEFAULT_SUBNET_MASK: "/24"
+      ETHSTATIC_BBB_IP2_SUBNET_MASK: "/24"
+      ETHSTATIC_BBB_IP3_SUBNET_MASK: "/24"
+      ETHSTATIC_BBB_IP4_SUBNET_MASK: "/24"
+      ETHSTATIC_BBB_IP5_SUBNET_MASK: "/24"
+      ETHSTATIC_BBB_IP6_SUBNET_MASK: "/24"
+      # A # LTE > ETH > WIFI
+      # B # LTE > WIFI > ETH
+      # C # WIFI > LTE > ETH
+      # D # WIFI > ETH > LTE
+      # E # ETH > LTE > WIFI
+      # F # ETH > WIFI > LTE
+      INTERFACE_ORDER: E                                #DEFAULT A
+      # E0 #  ETH0 > ETH1
+      # E1 #  ETH1 > ETH0
+      ETHERNET_INTERFACE_PRIORITY: EC                  #DEFAULT EC Priority for attempting internet access
+      # S #  Static > Dynamic
+      # D #  Dynamic > Static
+      ETHERNET_STATIC_PRIORITY: D                      #DEFAULT D priority for attempting internet access
+      #reset counter 2  - try repair existing connection
+      #reset counter 3 - try repair any connection
+      #reset counter 5 - try repair network
+      #reset counter 10 - try repair gateway
+      THRESH_REPAIR_CONNECTION: 2
+      THRESH_REPAIR_ANYCONNECTION: 3
+      THRESH_NETWORK: 5
+      THRESH_GATEWAY: 10
+      #how many loops until we try to use our default connection order again
+      THRESH_REPAIR_DEFAULT_CONNECTION: 800                                               #DEFAULT 15
+      #operational vars
+      SLEEP_TIME: 10         #time to wait between executions of main while loop         #DEFAULT 10
+      PING_COUNT: 5          #number of times to attempt to ping in one call             #DEFAULT 5
+      NAMESERVER1: "1.1.1.1"
+      NAMESERVER2: "8.8.8.8"
+      NAMESERVER3: "208.67.222.222"
+      HOST: "status.eng.envio.systems"        #host to use for ping checks
+      HOST_PORT: "443"        #host port to use for ping checks
+      HOST_PATH: "/healthcheck" #path to use for ping checks on $HOST
+      PING_SLEEP_TIME: 1    #time to wait between ping attempts                          #DEFAULT 1
+      PING_SUCCESS_REQUIRED: 2 #number of pings required to pass a ping test (gt, not gte)
+      PING_MODEM_SLEEP_RESET_TIME: 100
+      HTTP_PING_WAIT_TIME: 15
+      HTTP_PING_PROTOCOL: "https"
+      #================= v2.5 USER Vars =========
+      #=lte APN defaults
+      THREEGPP_TIMEOUT: "210"  #MAX of 500, default 60: number of secs to allow for modem timeout with mmcli actions, scanning networks etc sometimes takes forevverr (max of 500)
+      ONCE_ICCID_PREFIX: "8988280"
+      ONCE_APN: "iot.1nce.net"
+      TWILIO_ICCID_PREFIX: "8988307"
+      TWILIO_APN: "super"
+      TELEKOM_ICCID_PREFIX: "8949020"
+      TELEKOM_APN: "internet.telekom"
+      VODAFONE_ICCID_PREFIX1: "2619521"
+      VODAFONE_ICCID_PREFIX2: "2720601"
+      VODAFONE_ICCID_PREFIX3: "2620600"
+      VODAFONE_APN: "web.vodafone.de"
+      DEFAULT_APN: "iot.1nce.net"
+      #=operational vars
+      BRUTEFORCE_LTE_PROVIDERS: 1
+      THRESH_BRUTEFORCE: 9
+      APN: "iot.1nce.net"
+      APN_USER: ""
+      APN_PASS: ""
+      IP: "4"
+      # A # eSIM, Bottom, Top  #DEFAULT
+      # B # eSIM, Top, Bottom
+      # C # Bottom, eSIM, Top
+      # D # Bottom, Top, eSIM
+      # E # Top, eSIM, Bottom
+      # F # Top, Bottom, eSIM
+      SIM_ORDER: "A"
+      LTE_MINIMUM_CONNECTION: "-84"
+      #=================================
+      NTPSERVER1: "pool.ntp.org"
+      NTPSERVER2: "time.nist.gov"
+      NTPSERVER3: "time.esa.int"
+    ppp_config:
+      APN_FQDN: iot.1nce.net
+      APN_USER: ""
+      APN_PASSWORD: ""

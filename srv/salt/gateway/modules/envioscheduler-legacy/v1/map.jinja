@@ -1,0 +1,9 @@
+{%- import_yaml slspath + "/defaults.yaml" as default_settings %}
+{%- set envioscheduler = salt.pillar.get(
+    'envio:envioscheduler',
+    default=default_settings.envio.envioscheduler,
+    merge=True) %}
+{%- set gateway = salt.pillar.get(
+    'envio:gateway',
+    default=default_settings.envio.gateway,
+    merge=True) %}

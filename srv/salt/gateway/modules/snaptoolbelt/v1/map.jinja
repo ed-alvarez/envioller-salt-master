@@ -1,0 +1,5 @@
+{%- import_yaml slspath + "/defaults.yaml" as default_settings %}
+{%- set snaptoolbelt = salt.pillar.get(
+    'envio:snaptoolbelt',
+    default=default_settings.envio.snaptoolbelt,
+    merge=True) %}

@@ -1,0 +1,17 @@
+{%- macro setting(ctx, name, default_value, key=none) -%}
+{%- set _key = key or name %}
+{%- if ctx[_key] is defined %}
+{{ name }} {{ ctx[_key]|default('', true) }}
+{%- elif default_value is not none %}
+#{{ name }} {{ default_value }}
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro setting_bool(ctx, name, default_value, key=none) -%}
+{%- set _key = key or name %}
+{%- if ctx[_key] is defined %}
+{{ name }} {{ 'true' if ctx[_key] else 'false' }}
+{%- elif default_value is not none %}
+#{{ name }} {{ 'true' if default_value else 'false' }}
+{%- endif %}
+{%- endmacro %}

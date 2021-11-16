@@ -1,0 +1,23 @@
+envio:
+  gateway:
+    install:     false
+    old_version: false
+    user:        debian
+    group:       debian
+    install_dir:     /home/debian/envioGateway
+    venv_dir:        /home/debian/envioGateway/env
+    deploy_key_file: /home/debian/.ssh/gateway_deploy_key
+    config:
+      prefix_id:   envio
+      client_id:   NO_CLIENT
+      building_id: NO_BLDG
+      snap_aes_encryption_enabled: False
+      cube_ping_interval: 30
+      cube_updater_timeout: 5000
+      cube_stdin_timeout: 5000
+      cube_updater_max_attempts: 20
+      mqtt_host:   localhost
+      mqtt_port:   1883
+      mqtt_user:     ""
+      mqtt_password: ""
+      mqtt_ca_cert:  ""

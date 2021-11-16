@@ -1,0 +1,11 @@
+{%- import_yaml slspath + "/defaults.yaml" as default_settings %}
+
+{%- set gw_scheduler_config = salt.pillar.get(
+    'envio:gateway:gwscheduler:config',
+    default=default_settings.envio.gateway.gwscheduler.config,
+    merge=True) %}
+
+{%- set gw_scheduler_versions = salt.pillar.get(
+    'envio:gateway:gwscheduler:versions',
+    default=default_settings.envio.gateway.gwscheduler.versions,
+    merge=True) %}

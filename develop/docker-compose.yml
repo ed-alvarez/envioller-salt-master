@@ -1,0 +1,33 @@
+version: "3.1"
+
+services:
+  salt:
+    container_name: salt
+    build:
+      context: ./
+      dockerfile: ./dockerfiles/Dockerfile_saltmaster
+    volumes:
+      # please do not modify this, you can create a symbolic link
+      # in your home pointing to 'envio-devops-salt/srv'
+      - "../srv:/srv"
+      - "../master:/root/master"
+      - "../pillar:/srv/pillar"
+    networks:
+      - docker-vpc
+
+  m1:
+    container_name: m1
+    privileged: true
+    build:
+      context: ./
+      dockerfile: ./dockerfiles/Dockerfile_minion_ubuntu_focal
+      args:
+        MINION_ID: "m1"
+    networks:
+      - docker-vpc
+    depends_on:
+      - salt
+
+networks:
+  docker-vpc:
+    driver: "bridge"

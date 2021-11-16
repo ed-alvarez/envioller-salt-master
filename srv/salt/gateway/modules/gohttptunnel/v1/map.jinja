@@ -1,0 +1,8 @@
+{%- import_yaml slspath + "/defaults.yaml" as default_settings %}
+
+{%- set gohttptunnel = salt.pillar.get(
+    'envio:gohttptunnel',
+    default=default_settings.envio.gohttptunnel,
+    merge=True) %}
+    
+

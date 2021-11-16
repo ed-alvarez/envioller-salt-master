@@ -1,0 +1,18 @@
+{%- set envio_distro_version = salt.grains.get('envio_distro_version') %}
+
+{%- if envio_distro_version == "2021.2.9" %}
+{%- import_yaml slspath + "/defaults_multisimusblte.yaml" as default_settings %}
+{%- elif envio_distro_version == "2020.7.1" %}
+{%- import_yaml slspath + "/defaults_usblte.yaml" as default_settings %}
+{%- else %}
+{%- import_yaml slspath + "/defaults_ppp.yaml" as default_settings %}
+{%- endif %}
+
+{%- set gwltefunctions = salt.pillar.get(
+    'envio:gwltefunctions',
+    default=default_settings.envio.gwltefunctions,
+    merge=True) %}
+{%- set gwltefunctions_config = salt.pillar.get(
+    'envio:gateway:gwltefunctions_config',
+    default=default_settings.envio.gwltefunctions_config,
+    merge=True) %}

@@ -1,0 +1,11 @@
+{%- import_yaml slspath + "/defaults.yaml" as default_settings %}
+
+{%- set envioller_config = salt.pillar.get(
+    'envio:gateway:envioller:config',
+    default=default_settings.envio.gateway.envioller.config,
+    merge=True) %}
+
+{%- set envioller_versions = salt.pillar.get(
+    'envio:gateway:envioller:versions',
+    default=default_settings.envio.gateway.envioller.versions,
+    merge=True) %}

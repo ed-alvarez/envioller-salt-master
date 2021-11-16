@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "usage:  configsbackup.sh <SALT_CALL>"
+echo "<SALT_CALL> says whether to use salt-call to upload the files found to salt; 1 for UPLOAD, 0 or nothing for NO UPLOAD"
+
+RUN_SALT_CALL=$1
+
+mkdir -p /home/debian/configsbackup
+sudo tar -zcvf "/home/debian/configsbackup/envio_config_$(date '+%Y-%m-%d_%H_%M_%S').tar.gz" /etc/envio
+
+if [[ $RUN_SALT_CALL -eq 1 ]]; then
+    echo "running without upload"
+else
+    #this is run with salt, don't use salt-call instead let salt do it
+    SLEEPTIME=$(shuf -i 5-30 -n 1)
+    echo "running with upload, sleeping for random $SLEEPTIME"
+    #sleep randomly so we dont try to upload to master at exactly same time
+    sleep $SLEEPTIME
+    sudo salt-call cp.push /home/debian/configsbackup/*.tar.gz remove_source=True
+fi

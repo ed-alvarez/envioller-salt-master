@@ -1,0 +1,111 @@
+    envioller:
+      config:
+        general:
+          poll_interval_in_seconds: 60
+          #poll_time_sec: 1000  #removed
+          # delay single point reading after write command executed for n seconds
+          write_feedback_readout_delay: 2
+          # this could be overriden by args
+          log_level: info
+          # compress EHPs and send them via different "ehpc" topic
+          compressed_ehp: False
+        # [status]
+        status:
+          enabled: True
+          period: 300
+        database:
+          # [database]
+          # for how many days or hours values should be stored in the database
+          # units can follow the number, "h" or "H" - hours, "d" or "D" - days, default unit is day.
+          # 2h - 2 hours
+          # 2d = 48 hours
+          # 2 = 48 hours
+          storage_period: 24h
+          path: /var/lib/envio/
+        # [mqtt]
+        mqtt:
+          keepalive:   60
+          max_points: 1000
+        ### PROTOCOL SPECIFIC
+        #[protocol-cylon]
+        protocol-cylon:
+          # PARALLEL or SEQUENTIAL
+          PollingStrategy: SEQUENTIAL
+          # polling - TCP socket timeout and number of retries before we issue Timeout exception (timeout in seconds) min=1, max=15
+          timeout: 1
+          # min=1, max=5
+          retries: 1
+          # enable or disable controls/writing (True/False)
+          enable_writing: True
+          # writing - TCP socket timeout and number of retries before we issue Timeout exception min=1, max=15
+          writing_timeout: 3
+          # min=1, max=5
+          writing_retries: 3
+          # operation_delay is to introduce delays between Cylon operation to reduce errors
+          operation_delay: 0.05
+        #[protocol-mitsubishi_mnet]
+        protocol-mitsubishi_mnet:
+          PollingStrategy: PARALLEL
+          PollingMode: PAGINATED
+          paginated_chunk_size: 10
+          timeout: 100
+        #[protocol-haystack]
+        protocol-haystack:
+          PollingStrategy: PARALLEL
+          PollingMode: ALL_POINTS
+          paginated_chunk_size: 100
+          timeout: 2400
+        # [protocol-modbus]
+        protocol-modbus:
+          PollingMode: POINT_BY_POINT
+          PollingStrategy: SEQUENTIAL
+          handle_local_echo: True
+          paginated_chunk_size: 400
+          timeout: 200
+          operation_delay: 0.005
+          retries: 3
+          retry_delay: 0.01
+        # [protocol-bacnet]
+        protocol-bacnet:
+          device_id: 17010
+          port: 47808
+          PollingStrategy: SEQUENTIAL
+          timeout: 10
+        #[protocol-trend]
+        protocol-trend:
+          # PARALLEL or SEQUENTIAL
+          PollingStrategy: PARALLEL
+          PollingMode: ALL_POINTS
+          paginated_chunk_size: 100
+          # filter LANs from protocol specific list of LANS (True/False)
+          filter_list_LAN: False
+          # filter Outstations from protocol specific list of Outstations available on LANs (True/False)
+          filter_list_OS: False
+          # multi points chunk size (min 1 and max 12)
+          datapoints_chunk_size: 1
+          # polling - TCP socket timeout and number of retries before we issue Timeout exception (timeout in seconds) min=1, max=15
+          multi_timeout: 0.8
+          # min=1, max=5
+          multi_retries: 2
+          # polling - TCP socket timeout and number of retries before we issue Timeout exception when doing 1-by-1 polling after failed polling on multiple points  (timeout in seconds) min=1, max=15
+          single_timeout: 1.5
+          # min=1, max=5
+          single_retries: 2
+          # enable or disable controls/writing (True/False)
+          enable_writing: True
+          # writing - TCP socket timeout and number of retries before we issue Timeout exception min=1, max=15
+          writing_timeout: 3
+          # min=1, max=5
+          writing_retries: 3
+          # ping outstation to check if points can be reached to avid acumulated timeouts if OS is down
+          ping_OS_before_polling: True
+          # ping outstation to check if points can be reached to avid acumulated timeouts if OS is down, retry between 1 and 10 times repeated each 500ms
+          max_ping_os_before_polling_retries: 10
+          # scanning - TCP socket timeout and number of retries before we issue Timeout exception min=1, max=180
+          scanning_timeout: 3.5
+          # min=1, max=10
+          scanning_retries: 3
+          # guess lans scanning - TCP socket timeout and number of retries before we issue Timeout exception min=1, max=180
+          guess_lans_scanning_timeout: 10
+          # min=1, max=60
+          guess_lans_scanning_retries: 2

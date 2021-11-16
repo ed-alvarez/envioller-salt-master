@@ -1,0 +1,39 @@
+{%- set config = salt.pillar.get('envio:gateway:config')  %}
+
+envio:
+  gateway:
+    gwscheduler:
+      versions:
+        gwscheduler: 21.07.19
+      config:
+        general:
+          prefix_id:   {{ config.prefix_id | yaml_encode }}
+          client_id:   {{ config.client_id | yaml_encode }}
+          building_id: {{ config.building_id | yaml_encode }}
+          timezone:    {{ config.timezone | yaml_encode }}
+          gw_local_id: {{ config.gw_local_id | yaml_encode }}
+          minion_id:   {{ grains['id'] | yaml_encode }}
+#          formatting fix
+
+          # this could be overriden by args
+          log_level: info
+
+        database:
+          # [database]
+          location: /var/lib/envio/gw-scheduler.db
+
+        # [mqtt]
+        mqtt:
+          client_id:   gw-scheduler
+          host:        {{ config.mqtt_host|default("localhost", true) }}
+          port:        {{ config.mqtt_port|default("1883", true) }}
+          username:    {{ config.mqtt_username|default("", true) }}
+          password:    {{ config.mqtt_password|default("", true) }}
+          keepalive:   60
+          certificate: {{ config.mqtt_ca_cert|default("", true) }}
+          clean_session: false
+
+        event-state-machine:
+          #[event-state-machine]
+          retention_period_minutes: 360
+          sleep_in_seconds: 10

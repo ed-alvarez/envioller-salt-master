@@ -1,0 +1,5 @@
+{%- import_yaml slspath + "/defaults.yaml" as default_settings %}
+{%- set blinkledinternet = salt.pillar.get(
+    'envio:blinkledinternet',
+    default=default_settings.envio.blinkledinternet,
+    merge=True) %}

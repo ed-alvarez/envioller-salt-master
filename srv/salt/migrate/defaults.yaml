@@ -1,0 +1,66 @@
+sls_path: /srv/salt
+modules_path: /srv/salt/gateway/modules
+states_path: /srv/salt/states
+
+current_modules:
+  - gohttptunnel
+  - systembase
+  - filebeat
+  - telegraf
+  - virtualenv
+  - cube
+  - remove_bone
+  - remote_status
+  - status-serve
+  - envioscheduler
+  - supervisor
+  - bacnet_stack
+  - blinkledinternet
+  - git
+  - logging
+  - net_checker
+  - opcdaclassic
+  - swapfile
+  - snaptoolbelt
+  - ifmetric
+  - networkmanager
+  - mqtt-bridge
+  - envioller
+  - envioller-legacy
+  - envioscheduler-legacy
+  - gw-scheduler
+  - gateway
+  - gwheartbeat
+  - gwltefunctions
+  - gwlogsclear
+  - gateway-status
+  - logrotate
+  # - gateway-workaround-modules
+
+stateless_folders:
+  - mqtt-regional-broken
+  - apt
+
+main_states:
+  - supervisor.sls
+  - git.sls
+  - ifmetric.sls
+  - envio/logging.sls
+  - envio/bacnet_stack
+  - envio/blinkledinternet
+  - envio/net_checker
+  - envio/opcdaclassic
+  - envio/swapfile
+  - envio/snaptoolbelt
+  - envio/envioller
+  - envio/envioller-legacy
+  - envio/envioscheduler-legacy
+  - envio/gw-scheduler
+  - envio/gateway
+  - envio/gwheartbeat
+  - envio/gwltefunctions
+  - envio/gwlogsclear
+  - envio/gateway-status
+  - networkmanager
+  - mqtt-bridge
+  - logrotate

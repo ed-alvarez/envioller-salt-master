@@ -1,0 +1,21 @@
+include:
+  - apt
+  - gateway.modules.account.v1
+  - gateway.modules.supervisor.v1
+  - gateway.modules.bacnet_stack.v1
+  - gateway.modules.blinkledinternet.v1
+  - gateway.modules.git.v1
+  - gateway.modules.logging.v1
+  - gateway.modules.net_checker.v1
+  - gateway.modules.swapfile.v1
+  - gateway.modules.ifmetric.v1
+  - gateway.modules.networkmanager.v1
+  - gateway.modules.mqtt-bridge.v1
+  - gateway.modules.envioller.v1
+  - gateway.modules.gw-scheduler.v1
+  - gateway.modules.gateway.v1
+  - gateway.modules.gwheartbeat.v1
+  - gateway.modules.gwlogsclear.v1
+  - gateway.modules.gateway-status.v1
+  - gateway.modules.gwltefunctions.v1
+

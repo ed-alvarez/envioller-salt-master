@@ -1,0 +1,166 @@
+#!/bin/bash
+
+log() {
+  printf '%s - %s\n' "$( date -Iseconds )" "$*"
+}
+#
+#NETWORKING_CMD=/etc/init.d/networking
+#SHUTDOWN_CMD=/sbin/shutdown
+#SALT_CALL_CMD=/usr/bin/salt-call
+#
+#restart_networking() {
+#  log "Restarting networking"
+#  maybe "${NETWORKING_CMD}" stop
+#  maybe "${NETWORKING_CMD}" start
+#}
+#
+#restart_system() {
+#  log "Restarting system"
+#  maybe "${SHUTDOWN_CMD}" -r now "net-checker turning off the lights"
+#  sleep 5
+#  exit 0
+#}
+
+#maybe() {
+#  "$@"
+#}
+
+#if [ -n "${TEST}" ]; then
+#  maybe() {
+#    # This will disable execution of network restart and system restart under TEST
+#	# to enable that functionality, comment whole maybe function under TEST
+#    log '#' "$@"
+#  }
+#
+#  # Should be a non-reachable IP address
+#  PING_TARGET="169.254.123.123"
+#  PING_INTERVAL=5
+#
+#
+#  RESTART_MINION_THRESHOLD=25
+#  RESTART_NETWORKING_THRESHOLD=40
+#  RESTART_SYSTEM_THRESHOLD=120
+#else
+#  PING_TARGET="salt-master.eng.envio.systems"
+#  PING_INTERVAL=180
+#
+#
+#  RESTART_MINION_THRESHOLD=600
+#  RESTART_NETWORKING_THRESHOLD=1800
+#  RESTART_SYSTEM_THRESHOLD=3600
+#
+#
+#  [ "$( id -u )" -eq 0 ] || {
+#    log Must be run as superuser
+#    exit 1
+#  }
+#
+#  [ -x "${NETWORKING_CMD}" ] || {
+#    log "Cannot find networking control at ${NETWORKING_CMD}"
+#    exit 2
+#  }
+#
+#  [ -x "${SHUTDOWN_CMD}" ] || {
+#    log "Cannot find executable shutdown command at ${SHUTDOWN_CMD}"
+#    exit 3
+#  }
+#
+#fi
+
+#if [ -x "${SALT_CALL_CMD}" ] ; then
+#  log "Using salt-call executable at ${SALT_CALL_CMD}; salt checking enabled"
+#
+#  minion_ping() {
+#    # timeout 30 salt-call test.ping &>/dev/null
+#    if grep -Rsq "True" /tmp/saltping.out
+#    then
+#      # log "Salt ping OK"
+#      true
+#    else
+#      # log "Salt ping NOK"
+#      false
+#    fi
+#    timeout 160 salt-call test.ping > /tmp/saltping.out &
+#  }
+#
+#  restart_minion() {
+#    log "Restarting salt-minion"
+#    maybe service salt-minion restart
+#  }
+#
+#else
+#  log "Salt not detected, not pinging"
+#
+#  minion_ping() {
+#    true
+#  }
+#
+#  restart_minion() {
+#    log "Restart-minion called, should never be called!"
+#  }
+#fi
+
+if [ -e /dev/watchdog ] ; then
+  log "Watchdog detected; using!"
+
+  write_watchdog() {
+    # dd works without redirection, making it work with "maybe"
+    maybe dd of=/dev/watchdog <<<1
+  }
+else
+  log "Beaglebone watchdog not detected; not using!"
+
+  write_watchdog() {
+    true
+  }
+fi
+
+#network_ping() {
+#  ping -c 1 "${PING_TARGET}" &>/dev/null
+#}
+#
+#uptime_secs() {
+#  local time="$( cat /proc/uptime )"
+#  # Trim everything after first dot
+#  echo "${time%%.*}"
+#}
+
+
+#min() {
+#  local min=$1
+#  shift
+#  for value in "${@}" ; do
+#    min=$(( value < min ? value : min ))
+#  done
+#  printf "%s" "${min}"
+#}
+#
+#LAST_NETWORKING_RESTART=0
+#maybe_restart_networking() {
+#  local NOW=$( uptime_secs )
+#  if (( NOW > ( LAST_NETWORKING_RESTART + RESTART_NETWORKING_THRESHOLD ) )) ; then
+#    LAST_NETWORKING_RESTART="${NOW}"
+#    restart_networking
+#  fi
+#}
+#
+#LAST_MINION_RESTART=0
+#maybe_restart_minion() {
+#  local NOW=$( uptime_secs )
+#  if (( NOW > ( LAST_MINION_RESTART + RESTART_MINION_THRESHOLD ) )) ; then
+#    LAST_MINION_RESTART="${NOW}"
+#    restart_minion
+#  fi
+#}
+
+run() {
+
+  while :
+  do
+    write_watchdog
+
+    sleep 5
+  done
+}
+
+run

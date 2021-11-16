@@ -1,0 +1,4 @@
+{% from slspath + "/map.jinja" import gwltefunctions_config with context %}
+IP=4
+APN={{ gwltefunctions_config.ppp_config.APN_FQDN }}
+PROXY=yes

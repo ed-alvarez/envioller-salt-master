@@ -1,0 +1,33 @@
+#!/bin/bash
+
+rm -rf /var/log/*.gz
+rm -rf /var/log/*.1
+rm -rf /var/log/*.2
+rm -rf /var/log/*.3
+rm -rf /var/log/*.4
+rm -rf /var/log/*.5
+rm -rf /var/log/*.6
+rm -rf /var/log/*.7
+rm -rf /var/log/*.8
+rm -rf /var/log/*.9
+rm -rf /var/log/*.10
+rm -rf /var/log/*.11
+rm -rf /home/debian/envioGateway/logs/gateway.log.*
+rm -rf /var/log/supervisor/supervisord.log.*
+rm -rf /var/log/filebeat/*
+logrotate -f /etc/logrotate.d/rsyslog
+logrotate -f /etc/logrotate.d/ethppp_networkswitch
+logrotate -f /etc/logrotate.d/envioller
+logrotate -f /etc/logrotate.d/lte_gpio_init
+rm -rf /var/log/envio/*.10
+rm -rf /var/log/envio/*.9
+rm -rf /var/log/envio/*.8
+rm -rf /var/log/envio/*.7
+rm -rf /var/log/envio/*.6
+rm -rf /var/log/envio/*.5
+rm -rf /var/log/envio/*.4
+rm -rf /var/log/envio/*.3
+rm -rf /var/log/envio/*.gz
+rm -rf /var/log/envio/envioller/*.log.*
+rm -rf /home/debian/.snap/cmdlog.txt.gz
+rm -rf /var/log/haproxy*

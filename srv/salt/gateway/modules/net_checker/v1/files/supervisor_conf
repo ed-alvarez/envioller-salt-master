@@ -1,0 +1,9 @@
+[program:net_checker]
+user=root
+directory=/tmp
+command=/usr/sbin/net-checker
+
+stdout_logfile=/var/log/net-checker
+redirect_stderror=true
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=5

@@ -1,0 +1,26 @@
+{%- set mqtthub_name = salt.pillar.get('envio:gateway:mosquitto:bridge:address').split(".")[0]  %}
+
+mosquitto:
+  config_dir:   /etc/mosquitto
+  include_dir:  /etc/mosquitto/conf.d
+  persistence_location: /var/lib/mosquitto/
+  conf_file: /etc/mosquitto/mosquitto.conf
+  conf_file_bridge: /etc/mosquitto/conf.d/bridge-to-{{ mqtthub_name }}.conf
+  allow_anonymous: true
+  pid_file: /var/run/mosquitto.pid
+  connection_messages: true
+  persistence: true
+  persistence_file: mosquitto.db
+  persistent_client_expiration: 14d
+  log_dest: 
+    - file /var/log/mosquitto/mosquitto.log
+  log_timestamp: true
+  log_types:
+    - warning
+    - error
+    - information
+  user: mosquitto
+  listeners:
+    default_listener:
+      port: 1883
+      bind_address: 127.0.0.1

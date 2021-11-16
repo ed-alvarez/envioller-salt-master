@@ -1,0 +1,7 @@
+envio:
+  bacnet_stack:
+    install: false
+    user: debian
+    group: debian
+    install_dir: /home/debian/bacnet-stack
+    deploy_key_file: /home/debian/.ssh/bacnet_stack_deploy_key

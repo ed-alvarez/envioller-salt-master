@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+logrotate:
+  pkg: logrotate
+  conf_file: '/etc/logrotate.conf'
+  include_dir: '/etc/logrotate.d'
+  cron_file: '/etc/cron.hourly/logrotate'
+  absent_cron_file: '/etc/cron.daily/logrotate'
+  user: root
+  group: root
+  service: cron
+  login_records_jobs: true
+  default_config:
+    daily: True
+    rotate: 3
+    create: True
+    missingok: True
+    notifempty: True
+    compress: True
+    maxsize: 10M
+    size: 15M

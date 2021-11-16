@@ -1,0 +1,7 @@
+{%- import_yaml "gateway/modules/networkmanager/v1/defaults.yaml" as default_settings %}
+
+{%- set networkmanager = salt['pillar.get'](
+    'networkmanager',
+    default=default_settings.networkmanager,
+    merge=True) %}
+

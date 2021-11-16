@@ -1,0 +1,6 @@
+{%- import_yaml "gateway/modules/mqtt-bridge/v1/defaults.yaml" as default_settings %}
+
+{%- set mosquitto = salt['pillar.get'](
+    'envio:gateway:mosquitto',
+    default=default_settings.mosquitto,
+    merge=True) %}

@@ -1,0 +1,20 @@
+{%- set gateway = salt.pillar.get('envio:gateway')  %}
+{%- set app_dir = '/home/debian/Envioller'          %}
+
+envio:
+  envioller:
+    install:     false
+    user:        debian
+    group:       debian
+    version:     master
+    install_dir:       {{ app_dir }}
+    venv_dir:          {{ app_dir }}/env
+    deploy_key_file:   /home/debian/.ssh/envioller_deploy_key
+    dir_cfg_modbus:    {{ app_dir }}/config/modbus
+    dir_cfg_bacnet:    {{ app_dir }}/config/bacnet
+    dir_cfg_mbus:      {{ app_dir }}/config/mbus
+    dir_logs_symlinks: /home/debian/logs
+  gateway:
+      client_id:   NO_CLIENT
+      building_id: NO_BLDG
+      gw_local_id: NO_GWID

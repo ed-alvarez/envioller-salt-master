@@ -1,0 +1,1 @@
+deb [trusted=yes] {{ url_base }}/envio-apps/buster buster main

@@ -1,0 +1,11 @@
+[Unit]
+Description=Gateway status service
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart= /bin/bash -c 'source /home/debian/gateway-status/venv/bin/activate && python3 /home/debian/gateway-status/run.py /etc/envio/gateway-status/client/local.cfg'
+
+[Install]
+WantedBy=multi-user.target

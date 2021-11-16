@@ -1,0 +1,10 @@
+{%- set gohttptunnel = salt.pillar.get('envio:gateway:gohttptunnel')  %}
+{%- set user  = 'debian' %}
+{%- set group = 'debian' %}
+
+envio:
+  gohttptunnel:
+    user:  {{ user  }}
+    group: {{ group }}
+    home:  /home/{{ user }}/gohttptunnel
+    tunnels: {{ gohttptunnel.tunnels }}
