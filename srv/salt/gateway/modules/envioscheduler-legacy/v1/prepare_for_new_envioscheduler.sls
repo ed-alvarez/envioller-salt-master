@@ -28,11 +28,3 @@ envioscheduler_move_old_logs:
 envioscheduler_relink_old_logs:
   file.absent:
     - name: /home/debian/logs/envioscheduler
-
-#do not erase old configs
-#envioscheduler_erase_backup_envioscheduler_configs:
-#  cmd.run:
-#    - name: 'if test -d /tmp/config_backup && test -d /etc/envio/gw-scheduler/; then rm -rf /tmp/config_backup; fi'
-
-
-#need to restart new gw-scheduler service

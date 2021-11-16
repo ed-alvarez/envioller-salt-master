@@ -22,13 +22,3 @@ envioscheduler_erase_old_renvioschedule_binaries:
 envioller_erase_old_envioschedule_service:
   file.absent:
     - name: /etc/supervisor/conf.d/envioscheduler.conf
-
-
-#envioscheduler_erase_old_envioscheduler_backup_configs:
-#  cmd.run:
-#    - name: 'if test -d /tmp/config_backup/config && test -f /etc/envio/gw-scheduler/local.cfg; then rm -rf /tmp/config_backup; fi'
-#    - require:
-#        - sls: envio.gw-scheduler.install
-
-
-#need to restart new gw-scheduler service

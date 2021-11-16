@@ -1,9 +1,9 @@
 {% from slspath + "/map.jinja" import envioller with context %}
 
 envioller_backup_old_gw_stuff:
-  cmd.run:
-    - name: 'if test -d config; then cp -rfp config /tmp/config_backup; fi'
-    - cwd: {{ envioller.install_dir }}
+  file.copy:
+    - name: /tmp/config_backup
+    - source: {{ envioller.install_dir }}/config
 
 envioller_config_directory:
   file.directory:
@@ -28,11 +28,3 @@ envioller_move_old_logs:
 envioller_relink_old_logs:
   file.absent:
     - name: /home/debian/logs/envioller
-
-#do not erase old configs
-#envioller_erase_backup_envioller_configs:
-#  cmd.run:
-#    - name: 'if test -d /tmp/config_backup && test -d /etc/envio/envioller/; then rm -rf /tmp/config_backup; fi'
-
-
-#need to restart new envioller service
