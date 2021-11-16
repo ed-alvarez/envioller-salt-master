@@ -3,7 +3,7 @@
 This repository contains the previously showcased proofs-of-concept which remove any use of unnecessary `cmd.run` calls
 and tries to minimize overhead and repetition using the correct tools
 
-These formulas aim to smooth out and speed up the deployment process of Envioller and all of the required dependencies
+These formulas aim to smooth out the deployment process of Envioller and all of the required dependencies
 minimizing bandwidth consumption as well.
 
 The following formulas have been tested with dummy `.deb` files which contain binaries and assets that weight

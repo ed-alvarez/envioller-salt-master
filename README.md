@@ -1,7 +1,7 @@
 # Envioller SaltStack
 
 This repository is a complete rework of the current deployment environment whose main purpose is
-to completely improve deployment times, reducing redundancy,
+to completely improve deployment times, reduce redundancy,
 code repetition, and other non-standard states/formulas that could be considered harmful
 to any deployment of this software.
 
